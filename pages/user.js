@@ -2,7 +2,6 @@ import style from "../styles/About.module.css"
 import Head from "next/head";
 import {useEffect, useState} from "react";
 
-
 const User = () => {
     const [userName, setUserName] = useState()
     const [item, setItem] = useState("")
