@@ -12,7 +12,6 @@ export default function Signup() {
         password: ""
     })
 
-
     async function handle() {
         const res = await fetch('http://localhost:8080/auth/signup', {
             method: "POST",

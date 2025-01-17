@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Script from 'next/script'
 import {useEffect, useState} from 'react'
 import {useRouter} from "next/router";
+import Signin from "../pages/signin";
+import Signup from "../pages/signup";
 
 const Nav = () => {
     const router = useRouter();
@@ -33,9 +35,19 @@ const Nav = () => {
                             <li onClick={logout}><Link href="/">Logout</Link></li>
                             : null
                     }
-                    <li><Link href="/">User</Link></li>
-                    <li><Link href="/">Signin</Link></li>
-                    <li><Link href="/">Signup</Link></li>
+                    {
+                        item !== null ?
+                            <li><Link href="/signin">Signin</Link></li>
+                            : null
+                    }
+                    {
+                        item !== null ?
+                            <li><Link href="/signup">Signup</Link></li>
+                            : null
+                    }
+
+                    <li onClick={Signin}><Link href="/">Signin</Link></li>
+                    <li onClick={Signup}><Link href="/">Signup</Link></li>
                     <li><Link href="/">Winderton</Link></li>
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="https://www.youtube.com/channel/winderton">Youtube</Link></li>
