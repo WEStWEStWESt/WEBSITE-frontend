@@ -1,9 +1,9 @@
-import style from "../styles/About.module.css"
+import style from "../styles/Page.module.css"
 import Head from "next/head";
 import {useEffect, useState} from "react";
 
 const User = () => {
-    const [userName, setUserName] = useState()
+    const [userName, setUserName] = useState("")
     const [item, setItem] = useState("")
 
     useEffect(() => {
@@ -12,15 +12,19 @@ const User = () => {
     }, []);
 
     async function fetchContent() {
-        const res = await fetch('http://localhost:8080/secured/user', {
-            headers: {
-                "Content-type": "application/json",
-                "Authorization": "Bearer" + localStorage.getItem("token")
+        try {
+            const res = await fetch('http://localhost:8080/secured/user', {
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": "Bearer" + localStorage.getItem("token")
+                }
+            })
+            if (res.ok) {
+                const json = await res.text()
+               setUserName(json)
             }
-        })
-        if (res.ok) {
-            const json = await res.text()
-           setUserName(json)
+        } catch (err) {
+            console.error(err)
         }
     }
 
@@ -32,12 +36,12 @@ const User = () => {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
-            <div className={style.containerSign}>
+            <div className={style.container}>
                 <div className={style.form}>
                     {
                         item !== null ?
-                            <p>Signed in as: {userName}</p>
-                            : <p>UNAUTHORIZED</p>
+                            <h1>Signed in as: {userName}</h1>
+                            : <h1>UNAUTHORIZED</h1>
                     }
                 </div>
             </div>

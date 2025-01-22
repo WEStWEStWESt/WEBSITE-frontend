@@ -1,4 +1,4 @@
-import style from "../styles/About.module.css"
+import style from "../styles/Page.module.css"
 import {useRouter} from "next/router";
 import {useState} from "react";
 import Head from "next/head";
@@ -12,17 +12,23 @@ export default function Signup() {
         password: ""
     })
 
-    async function handle() {
-        const res = await fetch('http://localhost:8080/auth/signup', {
-            method: "POST",
-            body: JSON.stringify(state),
-            headers: {
-                "Content-type": "application/json"
+    async function handleSubmit(e) {
+        e.preventDefault()
+        console.log(state)
+        try {
+            const res = await fetch('http://localhost:8080/auth/signup', {
+                method: "POST",
+                body: JSON.stringify(state),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            if (res.ok) {
+                alert("yeah! success, baby!!!")
+                await router.push("/signin")
             }
-        })
-        if (res.ok) {
-            alert("yeah! success, baby!!!")
-            await router.push("/signin")
+        } catch (err) {
+            console.error(err)
         }
     }
 
@@ -39,23 +45,17 @@ export default function Signup() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <div className={style.containerSign}>
-                <div className={style.form}>
-                    <h1>Sign in</h1>
-                    <div>
-                        <input type="text" name="username" placeholder="username"
-                               value={state.username} onChange={extract} autoComplete="off"/>
-                    </div>
-                    <div>
-                        <input type="email" name="email" placeholder="email"
-                               value={state.email} onChange={handle} autoComplete="off"/>
-                    </div>
-                    <div>
-                        <input type="password" name="password" placeholder="password"
-                               value={state.password} onChange={handle}/>
-                    </div>
-                    <button onClick={handle}>Submit</button>
-                </div>
+            <div className={style.container}>
+                <form className={style.form} onSubmit={handleSubmit}>
+                    <h1>Sign up</h1>
+                    <input className={style.input} type="text"  name="username" placeholder="username"
+                           value={state.username} onChange={extract} autoComplete="off" required/>
+                    <input className={style.input} type="email" name="email" placeholder="email"
+                           value={state.email} onChange={extract} autoComplete="off" required/>
+                    <input className={style.input} type="password" name="password" placeholder="password"
+                           value={state.password} onChange={extract} autoComplete="off" required/>
+                    <button className={style.button} type={'submit'}>Submit</button>
+                </form>
             </div>
         </>
     );

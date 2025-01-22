@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: url("../public/backimg.JPG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.form {
+    position: relative;
+    top: 300px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+}
+
+.input, .button {
+    height: 3rem;
+    min-width: 300px;
+    font-size: 1.2rem;
+    padding: 0 20px;
+    border-radius: 5px;
+    border: 1px solid white;
+    opacity: .9;
+    outline: none;
+
+}
+
+.input:invalid {
+    border: 1px solid red;
+}
+
+.button {
+    margin-top: .5rem;
+    cursor: pointer;
+}
