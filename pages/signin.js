@@ -20,7 +20,6 @@ export default function Signin() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log(state)
         localStorage.clear()
         try {
             const res = await fetch('http://localhost:8080/auth/signin', {

@@ -14,7 +14,6 @@ export default function Signup() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log(state)
         try {
             const res = await fetch('http://localhost:8080/auth/signup', {
                 method: "POST",

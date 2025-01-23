@@ -3,15 +3,15 @@ import Head from "next/head";
 import {useEffect, useState} from "react";
 
 const User = () => {
-    const [userName, setUserName] = useState("")
-    const [item, setItem] = useState("")
+    const [userName, setUserName] = useState('')
 
     useEffect(() => {
-        setItem(localStorage.getItem("token"))
-        fetchContent()
+        const token = localStorage.getItem("token")
+        token ? fetchContent() : setUserName('')
     }, []);
 
     async function fetchContent() {
+
         try {
             const res = await fetch('http://localhost:8080/secured/user', {
                 headers: {
@@ -39,7 +39,7 @@ const User = () => {
             <div className={style.container}>
                 <div className={style.form}>
                     {
-                        item !== null ?
+                        userName ?
                             <h1>Signed in as: {userName}</h1>
                             : <h1>UNAUTHORIZED</h1>
                     }
